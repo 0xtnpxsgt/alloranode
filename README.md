@@ -31,10 +31,9 @@ wget https://raw.githubusercontent.com/0xtnpxsgt/alloranode/main/allora-oneclick
 - In the middle of the command execution, it will ask for keyring phrase, Here you need write a password (example : 12345678)
 - During pasting `HEAD_ID` , Don't use `Ctrl+C` to copy and `Ctrl+V` to paste, instead just select the whole `KEY_ID` and Press Right Click
 
-#### Step 4: Edit Docker Compose YML
-```bash
-nano docker-compose.yml
-```
+
+#### Step 4: 
+---------------------------------------------------------------
 
 - Copy & Paste the following code in it
 - Replace `head-id` & `WALLET_SEED_PHRASE` in worker-1 and worker-2 containers
