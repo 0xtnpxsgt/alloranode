@@ -209,6 +209,7 @@ volumes:
 
 #### Step 6: Build.
 ```bash
+cd allora-chain/basic-coin-prediction-node/
 docker compose up -d --build
 ```
 
