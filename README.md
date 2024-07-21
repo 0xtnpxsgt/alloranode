@@ -31,7 +31,7 @@ wget https://raw.githubusercontent.com/dxzenith/allora-worker-node/main/allora.s
 - In the middle of the command execution, it will ask for keyring phrase, Here you need write a password (example : 12345678)
 - During pasting `HEAD_ID` , Don't use `Ctrl+C` to copy and `Ctrl+V` to paste, instead just select the whole `KEY_ID` and Press Right Click
 
-#### Step3: Edit Docker Compose YML
+#### Step 4: Edit Docker Compose YML
 ```bash
 nano docker-compose.yml
 ```
@@ -40,7 +40,7 @@ nano docker-compose.yml
 - Replace `head-id` & `WALLET_SEED_PHRASE` in worker-1 and worker-2 containers
 
 ----------------------------------------------------------------
-#### Step 4: Edit Docker Compose YML
+#### Step 5: Edit Docker Compose YML
 ```bash
 version: '3'
 
@@ -209,7 +209,7 @@ volumes:
   head-data:
 ```
 
-#### Step 5: Build.
+#### Step 6: Build.
 ```bash
 docker compose up -d --build
 ```
