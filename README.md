@@ -214,12 +214,12 @@ volumes:
 docker compose up -d --build
 ```
 
-### Check your node status
+#### Check your node status
 ```bash
 docker compose up -d --build
 ```
 
-### Check running docker containers if there's no error
+#### Check running docker containers if there's no error
 ```bash
 # Check worker 2 logs
 docker compose logs -f worker-2
@@ -232,11 +232,14 @@ docker compose logs -f worker-1
 Check your worker logs and test the inferences using curl
 
 ```bash
+# Check Your Worker
 wget -O checkyourworker.sh https://raw.githubusercontent.com/casual1st/alloraworkersetup/main/checkyourworker.sh && chmod +x checkyourworker.sh && ./checkyourworker.sh
 ```
 
-
-
+#### Run Checker
+```bash
+./checkyourworker.sh
+```
 
 
 
