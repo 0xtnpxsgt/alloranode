@@ -222,11 +222,10 @@ docker compose logs -f worker-2
 docker compose logs -f worker-1
 ```
 
-#### Check if Worker 1 & 2 Work Properly (200 Results)
 Check your worker logs and test the inferences using curl
 
 ```bash
-# Check Your Worker
+# Download Checker
 wget -O checkyourworker.sh https://raw.githubusercontent.com/casual1st/alloraworkersetup/main/checkyourworker.sh && chmod +x checkyourworker.sh && ./checkyourworker.sh
 ```
 
