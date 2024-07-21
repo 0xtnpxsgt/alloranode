@@ -214,11 +214,7 @@ docker compose up -d --build
 ```
 
 #### Check your node status
-```bash
-docker compose up -d --build
-```
-
-#### Check running docker containers if there's no error
+##### Check running docker containers if there's no error
 ```bash
 # Check worker 2 logs
 docker compose logs -f worker-2
