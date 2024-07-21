@@ -3,14 +3,14 @@
 ![669800d234dc45d9775cacc3_testnetv2-announcement](https://github.com/user-attachments/assets/e71bd95c-725a-4f9f-b196-364468d974fe)
 
  
-- You must need to buy a VPS for running Rivalz rClient
+- You must need to buy a VPS for running Allora Worker
 - You can buy from : Contabo
 - You should buy VPS which is fulfilling all these requirements : 
 ```bash
 Operating System : Ubuntu 22.04
-CPU : Minimum of 4 cores
-RAM : 4 GB
-Storage : SSD or NVMe with at least 50GB of space
+CPU: Minimum of 1/2 core.
+Memory: 2 to 4 GB.
+Storage: SSD or NVMe with at least 5GB of space.
 ```
 
 ### Deployment - Read Carefully! 
