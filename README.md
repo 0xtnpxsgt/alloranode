@@ -14,7 +14,7 @@ Storage : SSD or NVMe with at least 50GB of space
 ```
 
 ### Deployment - Read Carefully! 
-Step1: 
+#### Step1: 
 ```bash
 rm -rf allora.sh allora-chain/ basic-coin-prediction-node/
 ```
