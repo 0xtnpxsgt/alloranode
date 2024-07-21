@@ -34,10 +34,6 @@ if [[ ! "$response" =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-echo -e "${BOLD}${DARK_YELLOW}Stopping Docker${RESET}"
-execute_with_prompt "sudo docker stop $(docker ps -aq)"
-echo
-
 echo -e "${BOLD}${DARK_YELLOW}Removing Old Folders Allora...${RESET}"
 execute_with_prompt "rm -rf allora.sh allora-chain/ basic-coin-prediction-node/"
 echo
