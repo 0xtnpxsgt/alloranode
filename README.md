@@ -13,7 +13,7 @@ RAM : 4 GB
 Storage : SSD or NVMe with at least 50GB of space
 ```
 
-## Deployment - Read Carefully! 
+### Deployment - Read Carefully! 
 Step1: 
 ```bash
 rm -rf allora.sh allora-chain/ basic-coin-prediction-node/
@@ -211,7 +211,7 @@ Step3: Build.
 docker compose up -d --build
 ```
 
-# Check your node status
+### Check your node status
 ```bash
 docker compose up -d --build
 ```
