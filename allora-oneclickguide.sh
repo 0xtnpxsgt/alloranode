@@ -16,15 +16,8 @@ execute_with_prompt() {
     fi
 }
 
-echo -e "${BOLD}${UNDERLINE}${DARK_YELLOW}Requirement for running allora-worker-node${RESET}"
-echo
-echo -e "${BOLD}${DARK_YELLOW}Operating System : Ubuntu 22.04${RESET}"
-echo -e "${BOLD}${DARK_YELLOW}CPU : Min of 1/2 core.${RESET}"
-echo -e "${BOLD}${DARK_YELLOW}RAM : 2 to 4 GB.${RESET}"
-echo -e "${BOLD}${DARK_YELLOW}Storage : SSD or NVMe with at least 5GB of space.${RESET}"
-echo
-
-echo -e "${CYAN}Do you meet all of these requirements? (Y/N):${RESET}"
+echo -e "${BOLD}${UNDERLINE}${DARK_YELLOW}Welcome to 0xTNPxSGT Allora Worker Node Installer${RESET}"
+echo -e "${CYAN}Are you ready? (Y/N):${RESET}"
 read -p "" response
 echo
 
