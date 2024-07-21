@@ -47,10 +47,6 @@ execute_with_prompt 'cd allora-chain/basic-coin-prediction-node/'
 echo
 execute_with_prompt 'docker compose down'
 echo
-execute_with_prompt 'docker container stop worker-basic-eth-pred'
-echo
-execute_with_prompt 'docker container rm worker-basic-eth-pred'
-echo
 
 echo -e "${BOLD}${DARK_YELLOW}Creating Worker.${RESET}"
 execute_with_prompt 'mkdir workers'
