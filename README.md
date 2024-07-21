@@ -39,7 +39,8 @@ nano docker-compose.yml
 - Copy & Paste the following code in it
 - Replace `head-id` & `WALLET_SEED_PHRASE` in worker-1 and worker-2 containers
 
-Step3: Edit Docker Compose YML
+----------------------------------------------------------------
+#### Step 4: Edit Docker Compose YML
 ```bash
 version: '3'
 
@@ -208,7 +209,7 @@ volumes:
   head-data:
 ```
 
-Step3: Build.
+#### Step 5: Build.
 ```bash
 docker compose up -d --build
 ```
