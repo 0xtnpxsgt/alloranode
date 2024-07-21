@@ -31,7 +31,7 @@ wget https://raw.githubusercontent.com/dxzenith/allora-worker-node/main/allora.s
 - In the middle of the command execution, it will ask for keyring phrase, Here you need write a password (example : 12345678)
 - During pasting `HEAD_ID` , Don't use `Ctrl+C` to copy and `Ctrl+V` to paste, instead just select the whole `KEY_ID` and Press Right Click
 
-Step3: Edit Docker Compose YML
+#### Step3: Edit Docker Compose YML
 ```bash
 nano docker-compose.yml
 ```
