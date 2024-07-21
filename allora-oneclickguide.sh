@@ -34,20 +34,20 @@ if [[ ! "$response" =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-echo -e "${BOLD}${DARK_YELLOW}Updating system dependencies...${RESET}"
-execute_with_prompt "sudo apt update -y && sudo apt upgrade -y"
+echo -e "${BOLD}${DARK_YELLOW}Stopping Docker${RESET}"
+execute_with_prompt "docker stop $(docker ps -aq)"
 echo
 
-echo -e "${BOLD}${DARK_YELLOW}Installing packages...${RESET}"
-execute_with_prompt "sudo apt install ca-certificates zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev curl git wget make jq build-essential pkg-config lsb-release libssl-dev libreadline-dev libffi-dev gcc screen unzip lz4 -y"
+echo -e "${BOLD}${DARK_YELLOW}Removing Old Folders Allora...${RESET}"
+execute_with_prompt "rm -rf allora.sh allora-chain/ basic-coin-prediction-node/"
 echo
 
 echo -e "${BOLD}${DARK_YELLOW}Installing python3...${RESET}"
 execute_with_prompt "sudo apt install python3 python3-pip -y"
 echo
 
-echo -e "${BOLD}${DARK_YELLOW}Installing Docker...${RESET}"
-execute_with_prompt 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg'
+echo -e "${BOLD}${DARK_YELLOW}Installing Allora...${RESET}"
+execute_with_prompt 'wget https://raw.githubusercontent.com/dxzenith/allora-worker-node/main/allora.sh && chmod +x allora.sh && ./allora.sh'
 echo
 execute_with_prompt 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null'
 echo
