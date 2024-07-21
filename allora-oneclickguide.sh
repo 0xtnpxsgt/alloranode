@@ -35,7 +35,7 @@ if [[ ! "$response" =~ ^[Yy]$ ]]; then
 fi
 
 echo -e "${BOLD}${DARK_YELLOW}Stopping Docker${RESET}"
-execute_with_prompt "docker stop $(docker ps -aq)"
+execute_with_prompt "sudo docker stop $(docker ps -aq)"
 echo
 
 echo -e "${BOLD}${DARK_YELLOW}Removing Old Folders Allora...${RESET}"
