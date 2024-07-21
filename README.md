@@ -219,7 +219,7 @@ docker compose up -d --build
 docker compose up -d --build
 ```
 
-### Check running docker containers
+### Check running docker containers if there's no error
 ```bash
 # Check worker 2 logs
 docker compose logs -f worker-2
@@ -228,7 +228,12 @@ docker compose logs -f worker-2
 docker compose logs -f worker-1
 ```
 
+#### Check if Worker 1 & 2 Work Properly (200 Results)
+Check your worker logs and test the inferences using curl
 
+```bash
+wget -O checkyourworker.sh https://raw.githubusercontent.com/casual1st/alloraworkersetup/main/checkyourworker.sh && chmod +x checkyourworker.sh && ./checkyourworker.sh
+```
 
 
 
