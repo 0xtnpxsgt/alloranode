@@ -40,7 +40,6 @@ nano docker-compose.yml
 - Replace `head-id` & `WALLET_SEED_PHRASE` in worker-1 and worker-2 containers
 
 ----------------------------------------------------------------
-#### Step 5: Edit Docker Compose YML
 ```bash
 version: '3'
 
