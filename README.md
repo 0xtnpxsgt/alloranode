@@ -222,7 +222,7 @@ docker compose logs -f worker-2
 docker compose logs -f worker-1
 ```
 
-Check your worker logs and test the inferences using curl
+#### Check your worker logs and test the inferences using curl
 
 ```bash
 # Download Checker
