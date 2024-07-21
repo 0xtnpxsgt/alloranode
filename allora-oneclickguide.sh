@@ -42,250 +42,37 @@ echo -e "${BOLD}${DARK_YELLOW}Removing Old Folders Allora...${RESET}"
 execute_with_prompt "rm -rf allora.sh allora-chain/ basic-coin-prediction-node/"
 echo
 
-echo -e "${BOLD}${DARK_YELLOW}Installing python3...${RESET}"
-execute_with_prompt "sudo apt install python3 python3-pip -y"
-echo
-
 echo -e "${BOLD}${DARK_YELLOW}Installing Allora...${RESET}"
 execute_with_prompt 'wget https://raw.githubusercontent.com/dxzenith/allora-worker-node/main/allora.sh && chmod +x allora.sh && ./allora.sh'
 echo
-execute_with_prompt 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null'
+
+echo -e "${BOLD}${DARK_YELLOW}Merging Process...${RESET}"
+execute_with_prompt 'cd allora-chain/basic-coin-prediction-node/'
 echo
-execute_with_prompt 'sudo apt-get update'
+execute_with_prompt 'docker compose down'
 echo
-execute_with_prompt 'sudo apt-get install docker-ce docker-ce-cli containerd.io -y'
+execute_with_prompt 'docker container stop worker-basic-eth-pred'
+echo
+execute_with_prompt 'docker container rm worker-basic-eth-pred'
 echo
 
-echo -e "${BOLD}${DARK_YELLOW}Checking docker version...${RESET}"
-execute_with_prompt 'docker version'
+echo -e "${BOLD}${DARK_YELLOW}Creating Worker.${RESET}"
+execute_with_prompt 'mkdir workers'
+echo
+execute_with_prompt 'mkdir workers/worker-1 workers/worker-2'
+echo
+execute_with_prompt 'sudo chmod -R 777 workers/worker-1'
+echo
+execute_with_prompt 'sudo chmod -R 777 workers/worker-2'
+echo
+execute_with_prompt 'sudo docker run -it --entrypoint=bash -v ./workers/worker-1:/data alloranetwork/allora-inference-base:latest -c "mkdir -p /data/keys && (cd /data/keys && allora-keys)"'
+echo
+execute_with_prompt 'sudo docker run -it --entrypoint=bash -v ./workers/worker-2:/data alloranetwork/allora-inference-base:latest -c "mkdir -p /data/keys && (cd /data/keys && allora-keys)"'
 echo
 
-echo -e "${BOLD}${DARK_YELLOW}Installing Docker Compose...${RESET}"
-VER=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep tag_name | cut -d '"' -f 4)
-echo
-execute_with_prompt 'sudo curl -L "https://github.com/docker/compose/releases/download/'"$VER"'/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose'
-echo
-execute_with_prompt 'sudo chmod +x /usr/local/bin/docker-compose'
+echo -e "${BOLD}${DARK_YELLOW}Replacing Compose YML...${RESET}"
+execute_with_prompt 'rm -rf docker-compose.yml && nano docker-compose.yml'
 echo
 
-echo -e "${BOLD}${DARK_YELLOW}Checking docker-compose version...${RESET}"
-execute_with_prompt 'docker-compose --version'
-echo
-
-if ! grep -q '^docker:' /etc/group; then
-    execute_with_prompt 'sudo groupadd docker'
-    echo
-fi
-
-execute_with_prompt 'sudo usermod -aG docker $USER'
-echo
-
-echo -e "${BOLD}${DARK_YELLOW}Installing Go...${RESET}"
-execute_with_prompt 'cd $HOME'
-echo
-execute_with_prompt 'ver="1.21.3" && wget "https://golang.org/dl/go$ver.linux-amd64.tar.gz"'
-echo
-execute_with_prompt 'sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf "go$ver.linux-amd64.tar.gz"'
-echo
-execute_with_prompt 'rm "go$ver.linux-amd64.tar.gz"'
-echo
-execute_with_prompt 'echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> $HOME/.bash_profile'
-echo
-execute_with_prompt 'source $HOME/.bash_profile'
-echo
-
-echo -e "${BOLD}${DARK_YELLOW}Checking go version...${RESET}"
-execute_with_prompt 'go version'
-echo
-
-echo -e "${BOLD}${UNDERLINE}${DARK_YELLOW}Installing Allorand...${RESET}"
-git clone https://github.com/allora-network/allora-chain.git
-cd allora-chain && make all
-echo
-
-echo -e "${BOLD}${DARK_YELLOW}Checking allorand version...${RESET}"
-allorad version
-echo
-
-echo -e "${BOLD}${UNDERLINE}${DARK_YELLOW}Importing wallet...${RESET}"
-allorad keys add testkey --recover
-echo
-
-echo "Request faucet to your wallet from this link: https://faucet.testnet-1.testnet.allora.network/"
-echo
-
-echo -e "${BOLD}${UNDERLINE}${DARK_YELLOW}Installing worker node...${RESET}"
-git clone https://github.com/allora-network/basic-coin-prediction-node
-cd basic-coin-prediction-node
-mkdir worker-data
-mkdir head-data
-echo
-
-echo -e "${BOLD}${DARK_YELLOW}Giving permissions...${RESET}"
-sudo chmod -R 777 worker-data head-data
-echo
-
-echo -e "${BOLD}${DARK_YELLOW}Creating Head keys...${RESET}"
-echo
-sudo docker run -it --entrypoint=bash -v $(pwd)/head-data:/data alloranetwork/allora-inference-base:latest -c "mkdir -p /data/keys && (cd /data/keys && allora-keys)"
-echo
-sudo docker run -it --entrypoint=bash -v $(pwd)/worker-data:/data alloranetwork/allora-inference-base:latest -c "mkdir -p /data/keys && (cd /data/keys && allora-keys)"
-echo
-
-echo -e "${BOLD}${DARK_YELLOW}This is your Head ID:${RESET}"
-cat head-data/keys/identity
-echo
-
-if [ -f docker-compose.yml ]; then
-    rm docker-compose.yml
-    echo "Removed existing docker-compose.yml file."
-    echo
-fi
-
-read -p "Enter HEAD_ID: " HEAD_ID
-echo
-
-read -p "Enter WALLET_SEED_PHRASE: " WALLET_SEED_PHRASE
-echo
-
-read -p "Enter TOPIC_ID: " TOPIC_ID
-echo
-
-echo -e "${BOLD}${UNDERLINE}${DARK_YELLOW}Generating docker-compose.yml file...${RESET}"
-cat <<EOF > docker-compose.yml
-version: '3'
-services:
-  inference:
-    container_name: inference-basic-eth-pred
-    build:
-      context: .
-    command: python -u /app/app.py
-    ports:
-      - "8000:8000"
-    networks:
-      eth-model-local:
-        aliases:
-          - inference
-        ipv4_address: 172.22.0.4
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/inference/ETH"]
-      interval: 10s
-      timeout: 10s
-      retries: 12
-    volumes:
-      - ./inference-data:/app/data
-
-  updater:
-    container_name: updater-basic-eth-pred
-    build: .
-    environment:
-      - INFERENCE_API_ADDRESS=http://inference:8000
-    command: >
-      sh -c "
-      while true; do
-        python -u /app/update_app.py;
-        sleep 24h;
-      done
-      "
-    depends_on:
-      inference:
-        condition: service_healthy
-    networks:
-      eth-model-local:
-        aliases:
-          - updater
-        ipv4_address: 172.22.0.5
-
-  worker:
-    container_name: worker-basic-eth-pred
-    environment:
-      - INFERENCE_API_ADDRESS=http://inference:8000
-      - HOME=/data
-    build:
-      context: .
-      dockerfile: Dockerfile_b7s
-    entrypoint:
-      - "/bin/bash"
-      - "-c"
-      - |
-        if [ ! -f /data/keys/priv.bin ]; then
-          echo "Generating new private keys..."
-          mkdir -p /data/keys
-          cd /data/keys
-          allora-keys
-        fi
-        allora-node --role=worker --peer-db=/data/peerdb --function-db=/data/function-db \
-          --runtime-path=/app/runtime --runtime-cli=bls-runtime --workspace=/data/workspace \
-          --private-key=/data/keys/priv.bin --log-level=debug --port=9011 \
-          --boot-nodes=/ip4/172.22.0.100/tcp/9010/p2p/$HEAD_ID \
-          --allora-chain-key-name=testkey \
-          --allora-chain-restore-mnemonic='$WALLET_SEED_PHRASE' \
-          --allora-node-rpc-address=https://allora-rpc.testnet-1.testnet.allora.network \
-          --topic=allora-topic-$TOPIC_ID-worker --allora-chain-worker-mode=worker
-    volumes:
-      - ./worker-data:/data
-    working_dir: /data
-    depends_on:
-      - inference
-      - head
-    networks:
-      eth-model-local:
-        aliases:
-          - worker
-        ipv4_address: 172.22.0.10
-
-  head:
-    container_name: head-basic-eth-pred
-    image: alloranetwork/allora-inference-base-head:latest
-    environment:
-      - HOME=/data
-    entrypoint:
-      - "/bin/bash"
-      - "-c"
-      - |
-        if [ ! -f /data/keys/priv.bin ]; then
-          echo "Generating new private keys..."
-          mkdir -p /data/keys
-          cd /data/keys
-          allora-keys
-        fi
-        allora-node --role=head --peer-db=/data/peerdb --function-db=/data/function-db  \
-          --runtime-path=/app/runtime --runtime-cli=bls-runtime --workspace=/data/workspace \
-          --private-key=/data/keys/priv.bin --log-level=debug --port=9010 --rest-api=:6000
-    ports:
-      - "6000:6000"
-    volumes:
-      - ./head-data:/data
-    working_dir: /data
-    networks:
-      eth-model-local:
-        aliases:
-          - head
-        ipv4_address: 172.22.0.100
-
-networks:
-  eth-model-local:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.22.0.0/24
-
-volumes:
-  inference-data:
-  worker-data:
-  head-data:
-EOF
-
-echo -e "${BOLD}${DARK_YELLOW}docker-compose.yml file generated successfully!${RESET}"
-echo
-
-echo -e "${BOLD}${UNDERLINE}${DARK_YELLOW}Building and starting Docker containers...${RESET}"
-docker-compose build
-docker-compose up -d
-echo
-
-echo -e "${BOLD}${DARK_YELLOW}Checking running Docker containers...${RESET}"
-docker ps
-echo
-echo "${BOLD}${DARK_YELLOW}Congratulations - Running Allora Node!!${RESET}"
+echo "${BOLD}${DARK_YELLOW}Preparing Complete${RESET}"
 echo
