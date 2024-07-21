@@ -216,7 +216,7 @@ docker compose up -d --build
 docker compose up -d --build
 ```
 
-# Check running docker containers
+### Check running docker containers
 ```bash
 # Check worker 2 logs
 docker compose logs -f worker-2
