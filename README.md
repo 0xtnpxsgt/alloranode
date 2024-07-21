@@ -1,5 +1,4 @@
-# alloranode
-
+# Allora Node with Worker 1 & 2 - UPDATED v2
 
 ## Rivalz rClint CLi Ultimate Guide 
  
