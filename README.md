@@ -14,17 +14,17 @@ Storage : SSD or NVMe with at least 50GB of space
 ```
 
 ### Deployment - Read Carefully! 
-#### Step1: 
+#### Step 1: 
 ```bash
 rm -rf allora.sh allora-chain/ basic-coin-prediction-node/
 ```
 
-Step2: 
+#### Step 2: 
 ```bash
 apt install wget
 ```
 
-Step3: Install Allora ( This will take time )
+#### Step 3: Install Allora ( This will take time )
 ```bash
 wget https://raw.githubusercontent.com/dxzenith/allora-worker-node/main/allora.sh && chmod +x allora.sh && ./allora.sh
 ```
