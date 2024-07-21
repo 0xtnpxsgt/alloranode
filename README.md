@@ -1,6 +1,7 @@
 # Allora Node with Worker 1 & 2 - UPDATED v2
 
-[669800d234dc45d9775cacc3_testnetv2-announcement](https://github.com/user-attachments/assets/5e28c1cd-8a19-4289-ad0b-7cdc2cf64e63)
+![669800d234dc45d9775cacc3_testnetv2-announcement](https://github.com/user-attachments/assets/e71bd95c-725a-4f9f-b196-364468d974fe)
+
  
 - You must need to buy a VPS for running Rivalz rClient
 - You can buy from : Contabo
