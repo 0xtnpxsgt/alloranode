@@ -35,7 +35,7 @@ if [[ ! "$response" =~ ^[Yy]$ ]]; then
 fi
 
 echo -e "${BOLD}${DARK_YELLOW}Removing Old Folders Allora...${RESET}"
-execute_with_prompt "rm -rf allora.sh allora-chain/ basic-coin-prediction-node/"
+execute_with_prompt 'rm -rf allora.sh allora-chain/ basic-coin-prediction-node/'
 echo
 
 echo -e "${BOLD}${DARK_YELLOW}Installing Allora...${RESET}"
