@@ -239,11 +239,11 @@ wget -O checkyourworker.sh https://raw.githubusercontent.com/casual1st/allorawor
 ./checkyourworker.sh
 ```
 ```bash
-# test worker 1 
+# Worker 1-test
  allora-topic-1-worker
 ```
 ```bash
-test worker 2
+# Worker 2-test
  allora-topic-2-worker
 ```
 
