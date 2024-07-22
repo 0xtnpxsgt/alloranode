@@ -216,6 +216,7 @@ cd allora-chain/basic-coin-prediction-node/
 ```bash
 docker compose up -d --build
 ```
+------------------------------------------------------------------------------
 
 #### Check your node status
 ```bash
