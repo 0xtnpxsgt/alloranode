@@ -35,7 +35,7 @@ wget https://raw.githubusercontent.com/0xtnpxsgt/alloranode/main/allora-oneclick
 #### Step 4: 
 ---------------------------------------------------------------
 
-- Copy & Paste the following code in it
+- Copy & Paste the following code. - to exit `Ctrl+X Y Enter` to save YML FILE
 - Replace `head-id` & `WALLET_SEED_PHRASE` in worker-1 and worker-2 containers
 
 ----------------------------------------------------------------
@@ -233,7 +233,14 @@ wget -O checkyourworker.sh https://raw.githubusercontent.com/casual1st/allorawor
 ```bash
 ./checkyourworker.sh
 ```
-
+#### input to test worker 1 
+```bash
+ allora-topic-1-worker
+```
+#### input to test worker 2
+```bash
+ allora-topic-2-worker
+```
 
 
 
